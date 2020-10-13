@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295835422527",
+    "firebase_url": "https://ez-chat-01.firebaseio.com",
+    "project_id": "ez-chat-01",
+    "storage_bucket": "ez-chat-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295835422527:android:c12ba8eecccf9e7b6fcd8a",
+        "android_client_info": {
+          "package_name": "com.example.ezchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295835422527-gp10gfb1qi4i2n1u60if2bg4c5rqgvpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ezchat",
+            "certificate_hash": "181967a2f50be2fe1cbfd19f516958cfd3fe5184"
+          }
+        },
+        {
+          "client_id": "295835422527-oaplpnn0pb3f8vet8n1bptraa6e3kr2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXzmUqxLimOVWiNo0hVJ94fY1zRB7sVEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295835422527-oaplpnn0pb3f8vet8n1bptraa6e3kr2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
