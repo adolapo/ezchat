@@ -1,0 +1,162 @@
+{
+  "chatDb" : {
+    "chatRoomMessages" : {
+      "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI2" : {
+        "-MHb4gv5wFbHbJFuV1fZ" : {
+          "imageUrl" : "",
+          "sender" : "Bobola Dolapo",
+          "text" : "This is a test!"
+        },
+        "-MHbIva5EF1VEtygfcTm" : {
+          "imageUrl" : "",
+          "sender" : "Bobola Dolapo",
+          "text" : "This is another test",
+          "timestamp" : 1600534854149
+        },
+        "-MHbMO-TW_0a-MffrRMd" : {
+          "imageUrl" : "",
+          "sender" : "Bobola Dolapo",
+          "text" : "Another test",
+          "timestamp" : 1600535759538
+        },
+        "-MHbMfZb87uf_KXRUrEO" : {
+          "imageUrl" : "",
+          "sender" : "Bobola Dolapo",
+          "text" : "Looks good now I think",
+          "timestamp" : 1600535835579
+        },
+        "-MHbQB-yfQ7ChNBq8kJS" : {
+          "imageUrl" : "",
+          "sender" : "Bobola Dolapo",
+          "text" : "So, this still works hey\n\nEven on multiple lines?",
+          "timestamp" : 1600536754873
+        },
+        "-MIQqdKGnyLMT7tPN3U_" : {
+          "imageUrl" : "",
+          "sender" : "UCalgary",
+          "text" : "Hey!",
+          "timestamp" : 1601416369060
+        }
+      }
+    },
+    "chatRooms" : {
+      "5kySnGwqV6RHEfEvmsIwfoQoc1I2" : {
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI10" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Joe",
+            "text" : "Actually very busy tomorrow",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Joe"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI11" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Tega",
+            "text" : "I give up",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Tega"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI2" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Jane",
+            "text" : "The thing is I'm really tired of all that's going on right now",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Jane"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI8" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Isaac",
+            "text" : "Guess what",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Isaac"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI9" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Martin",
+            "text" : "Maybe next time",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Martin"
+        }
+      },
+      "mWfjXPetyteX8OJHMF45yEL5H3t1" : {
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI10" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Joe",
+            "text" : "Actually very busy tomorrow",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Joe"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI11" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Tega",
+            "text" : "I give up",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Tega"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI2" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Jane",
+            "text" : "The thing is I'm really tired of all that's going on right now",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Jane"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI8" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Isaac",
+            "text" : "Guess what",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Isaac"
+        },
+        "room-tiHgcJ5JdfYjbPwzTRY22iagd0w2-TSvkPMk0S4ciqsE7rvkaE4OoErI9" : {
+          "mostRecentMessage" : {
+            "imageUrl" : "none",
+            "sender" : "Martin",
+            "text" : "Maybe next time",
+            "timeStamp" : "09-08-2020:19:50:29"
+          },
+          "participants" : "Bobola,Martin"
+        }
+      }
+    }
+  },
+  "userData" : {
+    "0JXfAI4LrHhHYlqCrJkXaGZugJk1" : {
+      "firstName" : "Abdulkareem",
+      "lastName" : "Dolapo",
+      "username" : "adolapo"
+    },
+    "5kySnGwqV6RHEfEvmsIwfoQoc1I2" : {
+      "firstName" : "Ucalgary",
+      "lastName" : "Email",
+      "photoUrl" : "temp",
+      "username" : "ucalgary"
+    },
+    "EeBrcRHBIuMX0fyYJMnFppQBsjl2" : {
+      "firstName" : "Yahoo",
+      "lastName" : "Email",
+      "username" : "yahoo"
+    },
+    "mWfjXPetyteX8OJHMF45yEL5H3t1" : {
+      "firstName" : "Bobola",
+      "lastName" : "Dolapo",
+      "username" : "bobola"
+    }
+  }
+}
