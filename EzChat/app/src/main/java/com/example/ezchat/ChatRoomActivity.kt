@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -18,9 +16,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ServerValue
 import de.hdodenhof.circleimageview.CircleImageView
-import java.sql.Timestamp
 
 class ChatRoomActivity : AppCompatActivity() {
     private lateinit var chatRoomHeader: TextView
@@ -42,20 +38,22 @@ class ChatRoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
 
-        currentUserId = intent.getStringExtra(USER_ID_EXTRA)
-        chatParticipantId = intent.getStringExtra(CHAT_PARTICIPANT_ID_EXTRA)
-        chatParticipantName = intent.getStringExtra(CHAT_PARTICIPANT_NAME_EXTRA)
-        chatRoomID = intent.getStringExtra(CHAT_ROOM_ID_EXTRA)
-        currentUsername = intent.getStringExtra(USER_NAME_EXTRA)
+        // Initialize chat participants' data
+        currentUserId = intent.getStringExtra(IntentConstants.USER_ID_EXTRA)
+        chatParticipantId = intent.getStringExtra(IntentConstants.CHAT_PARTICIPANT_ID_EXTRA)
+        chatParticipantUsername = intent.getStringExtra(IntentConstants.CHAT_PARTICIPANT_USER_NAME_EXTRA) // TODO: Change to username
+        chatRoomID = intent.getStringExtra(IntentConstants.CHAT_ROOM_ID_EXTRA)
+        currentUsername = intent.getStringExtra(IntentConstants.USER_NAME_EXTRA)
+        mapUsernames = mapOf(currentUserId to currentUsername, chatParticipantId to chatParticipantUsername)
 
-        Log.e(TAG, "MESSAGES_CHILD: $MESSAGES_CHILD")
+        Log.e(TAG, "MESSAGES_CHILD: " + DatabaseConstants.MESSAGES_NODE)
         dbReference = FirebaseDatabase.getInstance().reference
-        dbReferenceMessages = dbReference.child(MESSAGES_CHILD).child(chatRoomID!!)
+        dbReferenceMessages = dbReference.child(DatabaseConstants.MESSAGES_NODE).child(chatRoomID!!)
         Log.e(TAG, "Chat room ID: $chatRoomID")
 
         chatRoomLayoutManager = LinearLayoutManager(this)
         chatRoomHeader = findViewById<TextView>(R.id.chatHeaderLabel).apply{
-            text = chatParticipantName
+            text = chatParticipantUsername
         }
         chatRoomPhoto = findViewById<CircleImageView>(R.id.chatMessageSenderPhoto).apply{
             //TODO: Fix image reference
@@ -117,47 +115,20 @@ class ChatRoomActivity : AppCompatActivity() {
 
         fun bind(data: ChatRoomMessage){
             mChatMessageText?.text = data.text
-            mChatMessageSender?.text = data.sender
-            mTimestamp = data.timestamp
+            mChatMessageSender?.text = mapUsernames?.get(data.senderId)
+            mTimestamp = data.timeStamp
             imageUrl = data.imageUrl
-        }
-    }
-
-    class ChatRoomMessage(val sender: String,
-                          val text: String,
-                          val imageUrl: String,
-                          val timestamp: Long){
-        var key: String? = null
-
-        // Empty constructor needed for firebase
-        constructor(): this("", "", "", 0) //TODO: Fix tomestamp val
-    }
-
-    class ChatHeadData( var key: String?,
-                        val participants: String,
-                        val mostRecentMessage: ChatRoomMessage
-    ) {
-        private var participantId: String? = null
-        var participantName: String? = null
-        var participantPhotoUrl: String? = null
-
-        // Default empty constructor needed for firebase
-        constructor() : this(
-            "", "",
-            ChatRoomMessage("", "", "", 0)
-        )
-
-        init {
-            //TODO: Implement Init
         }
     }
 
     fun sendMessageOnClick(v: View){
         val messageText = messageEditText.text.toString()
         if (messageText.isNotEmpty()){
+            // TODO: Check to make sure both user Ids and usernames are not null
+
             // Send message
-            val message = ChatRoomMessage(currentUsername!!, messageText, "", System.currentTimeMillis())
-            dbReference.child(MESSAGES_CHILD)
+            val message = ChatRoomMessage(currentUserId!!, "", messageText, System.currentTimeMillis())
+            dbReference.child(DatabaseConstants.MESSAGES_NODE)
                 .child(chatRoomID!!)
                 .push()
                 .setValue(message)
@@ -165,34 +136,27 @@ class ChatRoomActivity : AppCompatActivity() {
 
             // Update chatHeads for both users
             Log.e(TAG, "RoomID: $chatRoomID")
-            val chatHead = mapOf("participants" to chatRoomID, "mostRecentMessage" to message) //TODO: FIx chatRoomID should be participants
-            dbReference.child(CHAT_ROOMS_CHILD)
+            val chatHead = ChatHeadDataModel(mapOf(currentUserId to currentUsername, chatParticipantId to chatParticipantUsername),
+                                              message)
+            dbReference.child(DatabaseConstants.CHAT_ROOMS_NODE)
                 .child(currentUserId!!)
                 .child(chatRoomID!!)
                 .setValue(chatHead)
-            dbReference.child(CHAT_ROOMS_CHILD)
+            dbReference.child(DatabaseConstants.CHAT_ROOMS_NODE)
                 .child(chatParticipantId!!)
                 .child(chatRoomID!!)
                 .setValue(chatHead)
         }
     }
 
-    companion object{
+    companion object {
+        private const val TAG = "ChatRoomActivity"
+
         private var currentUserId: String? = null
         private var currentUsername: String? = null
         private var chatParticipantId: String? = null
-        private var chatParticipantName: String? = null
+        private var chatParticipantUsername: String? = null
         private var chatRoomID: String? = null
-
-        private const val TAG = "ChatRoomActivity"
-        private const val USER_ID_EXTRA = "currentUserId"
-        private const val CHAT_ROOM_ID_EXTRA = "roomId"
-        private const val CHAT_PARTICIPANT_ID_EXTRA = "participantId"
-        private const val CHAT_PARTICIPANT_NAME_EXTRA = "particpantName"
-        private const val CHAT_PARTICIPANT_PHOTO_URL_EXTRA = "participantPhotoUrl"
-        private const val USER_NAME_EXTRA = "currentUserName"
-
-        private var MESSAGES_CHILD = "chatDb/chatRoomMessages"
-        private var CHAT_ROOMS_CHILD = "chatDb/chatRooms"
+        private var mapUsernames: Map<String?, String?>? = emptyMap();
     }
 }

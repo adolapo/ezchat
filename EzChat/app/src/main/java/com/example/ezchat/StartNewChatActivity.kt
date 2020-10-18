@@ -23,11 +23,11 @@ class StartNewChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start_new_chat)
 
         // Get intent extras
-        currentUserId = intent.getStringExtra(USER_ID_EXTRA)
+        currentUserId = intent.getStringExtra(IntentConstants.USER_ID_EXTRA)
 
         // Database initializations
         dbReference = FirebaseDatabase.getInstance().reference
-        dbReferenceUsers = dbReference.child(USERS_NODE)
+        dbReferenceUsers = dbReference.child(DatabaseConstants.USERS_NODE)
 
         // View Initializations
         usernameSearchButton = findViewById(R.id.usernameSearchButton)
@@ -80,7 +80,8 @@ class StartNewChatActivity : AppCompatActivity() {
                 Toast.makeText(view.context, "Error", Toast.LENGTH_LONG).show()
             }
         }
-        dbReferenceUsers.orderByChild(USERNAME_FIELD_KEY).equalTo(username).addListenerForSingleValueEvent(queryListener)
+        dbReferenceUsers.orderByChild(DatabaseConstants.USERNAME_CHILD).equalTo(username)
+            .addListenerForSingleValueEvent(queryListener)
     }
 
     fun endActivity(userId: String, username: String, userPhotoUrl: String){
@@ -94,27 +95,16 @@ class StartNewChatActivity : AppCompatActivity() {
         }
         Log.e(TAG, "Found ID: $newChatRoomId, Found name: $username")
         val intent = Intent()
-            .putExtra(CHAT_ROOM_ID_EXTRA, newChatRoomId)
-            .putExtra(CHAT_PARTICIPANT_ID_EXTRA, userId)
-            .putExtra(CHAT_PARTICIPANT_NAME_EXTRA, username)
-            .putExtra(CHAT_PARTICIPANT_PHOTO_URL_EXTRA, userPhotoUrl)
+            .putExtra(IntentConstants.CHAT_ROOM_ID_EXTRA, newChatRoomId)
+            .putExtra(IntentConstants.CHAT_PARTICIPANT_ID_EXTRA, userId)
+            .putExtra(IntentConstants.CHAT_PARTICIPANT_USER_NAME_EXTRA, username)
+            .putExtra(IntentConstants.CHAT_PARTICIPANT_PHOTO_URL_EXTRA, userPhotoUrl)
         setResult(RESULT_OK, intent)
         finish()
     }
 
     companion object{
         const val TAG = "StartNewChatActivity"
-
         private var currentUserId: String? = null
-
-        // Tags for intent extras
-        private const val USER_ID_EXTRA = "currentUserId"
-        private const val CHAT_ROOM_ID_EXTRA = "roomId"
-        private const val CHAT_PARTICIPANT_ID_EXTRA = "participantId"
-        private const val CHAT_PARTICIPANT_NAME_EXTRA = "particpantName"
-        private const val CHAT_PARTICIPANT_PHOTO_URL_EXTRA = "participantPhotoUrl"
-
-        const val USERS_NODE = "userData"
-        const val USERNAME_FIELD_KEY = "username"
     }
 }

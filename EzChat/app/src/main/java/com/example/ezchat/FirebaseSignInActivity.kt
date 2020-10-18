@@ -29,8 +29,8 @@ class FirebaseSignInActivity : AppCompatActivity() {
 
             // Start list of recent chat activities
             val inboxActivityIntent = Intent(this, InboxActivity::class.java)
-                .putExtra(USER_ID_TAG, user.uid)
-                .putExtra(USER_NAME_EXTRA, user.displayName) //TODO: Fix this. Fetch Username from DB instead
+                .putExtra(IntentConstants.USER_ID_EXTRA, user.uid)
+                .putExtra(IntentConstants.USER_NAME_EXTRA, user.displayName) //TODO: Fix this. Fetch Username from DB instead
             startActivity(inboxActivityIntent)
         } else {
             createSignInIntent()
@@ -71,7 +71,8 @@ class FirebaseSignInActivity : AppCompatActivity() {
 
                 // Start list of recent chat activities
                 val inboxActivityIntent = Intent(this, InboxActivity::class.java)
-                    .putExtra(USER_ID_TAG, user?.uid)
+                    .putExtra(IntentConstants.USER_ID_EXTRA, user?.uid)
+                    .putExtra(IntentConstants.USER_NAME_EXTRA, user?.displayName)
                 startActivity(inboxActivityIntent)
             } else {
                 Log.e(TAG, response?.error.toString())
@@ -82,7 +83,5 @@ class FirebaseSignInActivity : AppCompatActivity() {
     companion object{
         private const val RC_SIGN_IN = 123
         private const val TAG = "Sign-In-Activity"
-        private const val USER_ID_TAG = "currentUserId"
-        private const val USER_NAME_EXTRA = "currentUserName"
     }
 }
