@@ -10,8 +10,8 @@ class ChatRoomMessage(val senderId: String,
     constructor(): this("","","",0)
 }
 
-class ChatHeadDataModel( val participants: Map<String?, String?>,
-                         val mostRecentMessage: ChatRoomMessage){
+class ChatHead(val participants: Map<String?, String?>,
+               val mostRecentMessage: ChatRoomMessage){
     var key: String? = null;
     var participantId: String? = null
     var participantUsername: String? = null

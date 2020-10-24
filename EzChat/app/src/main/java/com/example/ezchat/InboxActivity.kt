@@ -26,10 +26,10 @@ class InboxActivity : AppCompatActivity() {
     private lateinit var chatHeadsLayoutManager: RecyclerView.LayoutManager
 
     // Firebase variables
-    private lateinit var chatRoomDataParser: SnapshotParser<ChatHeadDataModel?>
-    private lateinit var firebaseRecyclerViewOptions: FirebaseRecyclerOptions<ChatHeadDataModel>
+    private lateinit var chatRoomDataParser: SnapshotParser<ChatHead?>
+    private lateinit var firebaseRecyclerViewOptions: FirebaseRecyclerOptions<ChatHead>
     private lateinit var chatHeadsFirebaseRecyclerViewAdapter:
-            FirebaseRecyclerAdapter<ChatHeadDataModel, ChatHeadViewHolder>
+            FirebaseRecyclerAdapter<ChatHead, ChatHeadViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,26 +45,26 @@ class InboxActivity : AppCompatActivity() {
         dbReference = FirebaseDatabase.getInstance().reference
         dbReferenceChatRooms = dbReference.child(DatabaseConstants.CHAT_ROOMS_NODE).child(currentUserId!!)
         chatRoomDataParser =
-            SnapshotParser<ChatHeadDataModel?> { dataSnapshot ->
+            SnapshotParser<ChatHead?> { dataSnapshot ->
                 Log.e(TAG, dataSnapshot.value.toString())
-                val chatHead = dataSnapshot.getValue(ChatHeadDataModel::class.java)
+                val chatHead = dataSnapshot.getValue(ChatHead::class.java)
                 chatHead?.key = dataSnapshot.key
                 chatHead!!
             }
-        firebaseRecyclerViewOptions = FirebaseRecyclerOptions.Builder<ChatHeadDataModel>() // TODO: Modify this so it selects sorts chat rooms
+        firebaseRecyclerViewOptions = FirebaseRecyclerOptions.Builder<ChatHead>() // TODO: Modify this so it selects sorts chat rooms
             .setQuery(dbReferenceChatRooms.orderByChild(DatabaseConstants.MOST_RECENT_MESSAGE_TIMESTAMP), chatRoomDataParser)
             .setLifecycleOwner(this)
             .build()
 
         chatHeadsFirebaseRecyclerViewAdapter =
-            object : FirebaseRecyclerAdapter<ChatHeadDataModel, ChatHeadViewHolder>(firebaseRecyclerViewOptions){
+            object : FirebaseRecyclerAdapter<ChatHead, ChatHeadViewHolder>(firebaseRecyclerViewOptions){
                 override fun onCreateViewHolder(parent: ViewGroup, type: Int): ChatHeadViewHolder{
                     val newChatHead = LayoutInflater.from(parent.context)
                         .inflate(R.layout.item_chat_head, parent, false)
                     return ChatHeadViewHolder(newChatHead)
                 }
 
-                override fun onBindViewHolder(holder: ChatHeadViewHolder, position: Int, data: ChatHeadDataModel){
+                override fun onBindViewHolder(holder: ChatHeadViewHolder, position: Int, data: ChatHead){
                     data.setChatParticipantDetails(currentUserId!!)
                     holder.bind(data);
                     Log.e(TAG, "here after bind")
@@ -76,7 +76,7 @@ class InboxActivity : AppCompatActivity() {
                 }
 
                 // Overriding to reverse order of chat room heads
-                override fun getItem(position: Int): ChatHeadDataModel {
+                override fun getItem(position: Int): ChatHead {
                     return super.getItem(itemCount - (position + 1))
                 }
             }
@@ -119,7 +119,7 @@ class InboxActivity : AppCompatActivity() {
             }
         }
 
-        fun bind (data: ChatHeadDataModel){
+        fun bind (data: ChatHead){
             // TODO: Uncomment some commented code and remove others
             mChatHeadName?.text = data.participantUsername
             mMostRecentMessage?.text = data.mostRecentMessage.text
@@ -184,20 +184,20 @@ class InboxActivity : AppCompatActivity() {
 
     //*************************************************************************************************************
     // *****************Obsolete for this activity - will use fire base adapter instead*****************************
-    val sampleChatHeadsData: Array<ChatHeadDataModel> = arrayOf(
-        ChatHeadDataModel(mapOf("Participants" to "The participants"),
+    val sampleChatHeadsData: Array<ChatHead> = arrayOf(
+        ChatHead(mapOf("Participants" to "The participants"),
             ChatRoomMessage("Jane", "", "Hey how are you",0)),
-        ChatHeadDataModel(mapOf("Participants" to "The participants"),
+        ChatHead(mapOf("Participants" to "The participants"),
             ChatRoomMessage("Jane", "", "Hey how are you",0)),
-        ChatHeadDataModel(mapOf("Participants" to "The participants"),
+        ChatHead(mapOf("Participants" to "The participants"),
             ChatRoomMessage("Jane", "", "Hey how are you",0)),
-        ChatHeadDataModel( mapOf("Participants" to "The participants"),
+        ChatHead( mapOf("Participants" to "The participants"),
             ChatRoomMessage("Jane", "", "Hey how are you",0)),
-        ChatHeadDataModel(mapOf("Participants" to "The participants"),
+        ChatHead(mapOf("Participants" to "The participants"),
             ChatRoomMessage("Jane", "", "Hey how are you",0))
     )
 
-    class ChatHeadsAdapter(private val chatHeadsData: Array<ChatHeadDataModel>):
+    class ChatHeadsAdapter(private val chatHeadsData: Array<ChatHead>):
         RecyclerView.Adapter<ChatHeadViewHolder>(){
 
         // Create a new ChatHead view when Layout manager asks

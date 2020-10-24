@@ -3,7 +3,7 @@ package com.example.ezchat
 object DatabaseConstants {
     // Messages
     const val MESSAGES_NODE = "chatDb/chatRoomMessages";
-    const val MOST_RECENT_MESSAGE_TIMESTAMP = "mostRecentMessage/timestamp"
+    const val MOST_RECENT_MESSAGE_TIMESTAMP = "mostRecentMessage/timeStamp"
 
 
     //ChatRooms

@@ -136,7 +136,7 @@ class ChatRoomActivity : AppCompatActivity() {
 
             // Update chatHeads for both users
             Log.e(TAG, "RoomID: $chatRoomID")
-            val chatHead = ChatHeadDataModel(mapOf(currentUserId to currentUsername, chatParticipantId to chatParticipantUsername),
+            val chatHead = ChatHead(mapOf(currentUserId to currentUsername, chatParticipantId to chatParticipantUsername),
                                               message)
             dbReference.child(DatabaseConstants.CHAT_ROOMS_NODE)
                 .child(currentUserId!!)
