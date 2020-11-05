@@ -49,7 +49,6 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="searchUsername"
         android:orientation="horizontal"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
